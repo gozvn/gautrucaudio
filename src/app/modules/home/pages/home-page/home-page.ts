@@ -16,7 +16,7 @@ export class HomePage implements OnInit{
 
   ngOnInit(): void {
     this.homeservice.getRecords().subscribe((data:any)=>{
-      console.log(data)
+      // console.log(data)
     this.records = data;
 
     })
