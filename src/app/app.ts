@@ -1,13 +1,9 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Header } from './layouts/header/header';
-import { Footer } from './layouts/footer/footer';
-import { CurrencyPipe } from './pipes/CurrencyPipe.pipe';
-import { Homepage } from './homepage/homepage';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Homepage, Header, Footer ],
+  imports: [RouterOutlet ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

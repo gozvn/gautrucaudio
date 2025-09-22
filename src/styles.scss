@@ -11,3 +11,20 @@
     font-weight: bold; 
     text-transform: uppercase;
 }
+
+.category-tag {
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    margin-right: 5px;
+    margin-bottom: 3px;
+    border-radius: 12px;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    color: #495057;
+    text-decoration: none;
+    display: inline-block;
+}
+.category-tag:hover {
+    background: #e9ecef;
+    color: #495057;
+}
