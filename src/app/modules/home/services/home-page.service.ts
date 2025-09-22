@@ -13,11 +13,12 @@ export class HomePageService {
 
     constructor(private backendService: BackendService) {
     }
-    
-    getRecords(){
+
+    getRecords(limit:number = 0) {
+      
         const path = this.apiServerPaths.table.mg5spzij16k3hy9.records;
 
-        return this.backendService.get(path,{}, map((result: any) => {
+        return this.backendService.get(path,({params: {limit}}), map((result: any) => {
             return result?.list ?? []; // result err => array rong
         }))   
     }

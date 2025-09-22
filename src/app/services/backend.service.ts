@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
+import { HttpParams } from '@angular/common/http';
 // var // global 
 
 @Injectable({
@@ -23,13 +24,13 @@ export class BackendService {
         let url = "http://"
         if ( port === 443 ){
             url = "https://"
-        } // extent logi 80: 443 ??????
+        } 
         return `${url}${host}:${port}${prePath}/${path}`;
     }
     // get tra ve data Observable kieu any.
     get(path: string, options:any, callback: any = null): Observable<any> {
         options.headers = {
-            'xc-token': 'xg1z5ECTpAl98YWRFy6kQXnQP5KKtxeTAHNXFc0W'
+            'xc-token': 'xg1z5ECTpAl98YWRFy6kQXnQP5KKtxeTAHNXFc0W',
         }
         return this.http.get<any>(this._buildUrl(path), options)
             .pipe(callback || '');
