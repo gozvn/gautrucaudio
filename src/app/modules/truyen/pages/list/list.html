@@ -1,1 +1,16 @@
-<p>list works!</p>
+<app-header></app-header>
+<div *ngFor="let novel of listsNovel" class="card-novel">
+  <!-- <a [routerLink]="['/truyen', novel.id]"> -->
+    <a href="#">
+    <div class="card-image">
+      <!-- <img "#" alt="Hình ảnh truyện"> -->
+    </div>
+    <div class="card-content">
+      <h3 class="novel-title">{{ novel.title }}</h3>
+      <p class="novel-author">GT</p>
+      <p class="novel-description">GT</p>
+    </div>
+  </a>
+</div>
+
+<app-footer></app-footer>

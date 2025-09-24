@@ -1,16 +1,22 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { demoInterceptor } from './interceptors/demo.intercepter';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { provideHttpClient , withFetch, withInterceptors } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient , withFetch, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
+import { DemoInterceptor } from './interceptors/demo.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    // Thêm dòng này để cung cấp HttpClient và Interceptor
     provideHttpClient(
-      withFetch(),
-      withInterceptors([])
+        withInterceptorsFromDi(), 
+        withFetch()
     ),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: DemoInterceptor,
+      multi: true
+    },
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes), provideClientHydration(withEventReplay())
