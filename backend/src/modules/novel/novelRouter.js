@@ -5,7 +5,7 @@ const router = express.Router();
 export default router;
 
 router.get('/', (req, res) => {
-  res.send('Hello World!asdas')
+  res.status(200).send('Hello World!asdas')
 })
 router.post('/', (req, res) => {
   res.send('Hello World!asdas')
