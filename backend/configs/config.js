@@ -1,4 +1,5 @@
-require('dotenv').load()
+
+require('dotenv').config()
 module.exports = {
     app: {
         env: process.env.APP_ENV || 'development',
