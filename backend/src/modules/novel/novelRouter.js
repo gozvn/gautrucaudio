@@ -56,7 +56,7 @@ router.get('/test', async (req, res) => {
 })
 router.get('/', async (req, res) => {
   try {
-    // Ví dụ truy vấn danh sách novels (giả sử có bảng novels)
+    // truy vấn danh sách novels (giả sử có bảng novels)
     const [novels] = await sequelize.query(`
       SELECT * FROM novels 
       ORDER BY created_at DESC 
@@ -79,70 +79,71 @@ router.get('/', async (req, res) => {
   }
 });
 
-// router.get('/novels/:id', async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const [novel] = await sequelize.query(`
-//       SELECT * FROM novels WHERE id = :id
-//     `, {
-//       replacements: { id }
-//     });
+router.get('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const [novel] = await sequelize.query(`
+      SELECT * FROM novels WHERE id = :id
+    `, {
+      replacements: { id }
+    });
     
-//     if (novel.length === 0) {
-//       return res.status(404).json({
-//         status: 'error',
-//         code: 404,
-//         message: 'Không tìm thấy truyện'
-//       });
-//     }
+    if (novel.length === 0) {
+      return res.status(404).json({
+        status: 'error',
+        code: 404,
+        message: 'Không tìm thấy truyện'
+      });
+    }
     
-//     res.status(200).json({
-//       status: 'success',
-//       code: 200,
-//       message: 'Lấy thông tin truyện thành công',
-//       data: novel[0]
-//     });
-//   } catch (error) {
-//     res.status(500).json({
-//       status: 'error',
-//       code: 500,
-//       message: 'Lỗi khi lấy thông tin truyện',
-//       error: error.message
-//     });
-//   }
-// });
+    res.status(200).json({
+      status: 'success',
+      code: 200,
+      message: 'Lấy thông tin truyện thành công',
+      data: novel[0]
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'error',
+      code: 500,
+      message: 'Lỗi khi lấy thông tin truyện',
+      error: error.message
+    });
+  }
+});
 
-// router.post('/', async (req, res) => {
-//   try {
-//     const { title, description, author, content } = req.body;
+router.post('/create', async (req, res) => {
+  try {
+    const { title, title_slug, description, author, content } = req.body;
     
-//     const [result] = await sequelize.query(`
-//       INSERT INTO novels (title, description, author, content, created_at, updated_at)
-//       VALUES (:title, :description, :author, :content, NOW(), NOW())
-//     `, {
-//       replacements: { title, description, author, content }
-//     });
+    const [result] = await sequelize.query(`
+      INSERT INTO novels (title, title_slug, description, author, content, created_at, updated_at)
+      VALUES (:title, :title_slug, :description, :author, :content, NOW(), NOW())
+    `, {
+      replacements: { title, title_slug, description, author, content }
+    });
     
-//     res.status(201).json({
-//       status: 'success',
-//       code: 201,
-//       message: 'Tạo truyện mới thành công',
-//       data: { 
-//         id: result.insertId,
-//         title,
-//         description,
-//         author
-//       }
-//     });
-//   } catch (error) {
-//     res.status(500).json({
-//       status: 'error',
-//       code: 500,
-//       message: 'Lỗi khi tạo truyện mới',
-//       error: error.message
-//     });
-//   }
-// })
+    res.status(201).json({
+      status: 'success',
+      code: 201,
+      message: 'Tạo truyện mới thành công',
+      data: { 
+        id: result.insertId,
+        title,
+        description,
+        author
+      }
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'error',
+      code: 500,
+      message: 'Lỗi khi tạo truyện mới',
+      error: error.message
+    });
+  }
+})
+
 // router.put('/:id', async (req, res) => {
 //   try {
 //     const { id } = req.params;
