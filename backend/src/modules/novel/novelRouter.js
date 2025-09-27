@@ -119,74 +119,74 @@ router.post('/create', async (req, res) => {
   }
 })
 
-// router.put('/:id', async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const { title, description, author, content } = req.body;
+router.put('/edit/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, title_slug,  description, author, content } = req.body;
     
-//     const [result] = await sequelize.query(`
-//       UPDATE novels 
-//       SET title = :title, description = :description, author = :author, 
-//           content = :content, updated_at = NOW()
-//       WHERE id = :id
-//     `, {
-//       replacements: { id, title, description, author, content }
-//     });
+    const [result] = await sequelize.query(`
+      UPDATE novels 
+      SET title = :title, title_slug = :title_slug, description = :description, author = :author, 
+          content = :content, updated_at = NOW()
+      WHERE id = :id
+    `, {
+      replacements: { id, title,title_slug, description, author, content }
+    });
     
-//     if (result.affectedRows === 0) {
-//       return res.status(404).json({
-//         status: 'error',
-//         code: 404,
-//         message: 'Không tìm thấy truyện để cập nhật'
-//       });
-//     }
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        status: 'error',
+        code: 404,
+        message: 'Không tìm thấy truyện để cập nhật'
+      });
+    }
     
-//     res.status(200).json({
-//       status: 'success',
-//       code: 200,
-//       message: 'Cập nhật truyện thành công',
-//       data: { id, title, description, author }
-//     });
-//   } catch (error) {
-//     res.status(500).json({
-//       status: 'error',
-//       code: 500,
-//       message: 'Lỗi khi cập nhật truyện',
-//       error: error.message
-//     });
-//   }
-// });
+    res.status(200).json({
+      status: 'success',
+      code: 200,
+      message: 'Cập nhật truyện thành công',
+      data: { id, title, description, author }
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'error',
+      code: 500,
+      message: 'Lỗi khi cập nhật truyện',
+      error: error.message
+    });
+  }
+});
 
-// router.delete('/:id', async (req, res) => {
-//   try {
-//     const { id } = req.params;
+router.delete('/delete/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
     
-//     const [result] = await sequelize.query(`
-//       DELETE FROM novels WHERE id = :id
-//     `, {
-//       replacements: { id }
-//     });
+    const [result] = await sequelize.query(`
+      DELETE FROM novels WHERE id = :id
+    `, {
+      replacements: { id }
+    });
     
-//     if (result.affectedRows === 0) {
-//       return res.status(404).json({
-//         status: 'error',
-//         code: 404,
-//         message: 'Không tìm thấy truyện để xóa'
-//       });
-//     }
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        status: 'error',
+        code: 404,
+        message: 'Không tìm thấy truyện để xóa'
+      });
+    }
     
-//     res.status(200).json({
-//       status: 'success',
-//       code: 200,
-//       message: 'Xóa truyện thành công'
-//     });
-//   } catch (error) {
-//     res.status(500).json({
-//       status: 'error',
-//       code: 500,
-//       message: 'Lỗi khi xóa truyện',
-//       error: error.message
-//     });
-//   }
-// });
+    res.status(200).json({
+      status: 'success',
+      code: 200,
+      message: 'Xóa truyện thành công'
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'error',
+      code: 500,
+      message: 'Lỗi khi xóa truyện',
+      error: error.message
+    });
+  }
+});
 
