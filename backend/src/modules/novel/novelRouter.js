@@ -29,31 +29,6 @@ export default router;
 // Test kết nối khi load module
 testConnection();
 
-router.get('/test', async (req, res) => {
-  try {
-    // Test truy vấn CSDL
-    const [results] = await sequelize.query('SELECT 1 as test');
-    
-    res.status(200).json({
-      status: 'success',
-      code: 200, 
-      message: 'Kết nối CSDL thành công!',
-      database: {
-        host: dbConfig.host,
-        database: dbConfig.database,
-        connection_test: results[0]
-      },
-      data: []
-    });
-  } catch (error) {
-    res.status(500).json({
-      status: 'error',
-      code: 500,
-      message: 'Lỗi kết nối CSDL',
-      error: error.message
-    });
-  }
-})
 router.get('/', async (req, res) => {
   try {
     // truy vấn danh sách novels (giả sử có bảng novels)
