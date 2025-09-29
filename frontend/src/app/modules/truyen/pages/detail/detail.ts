@@ -22,7 +22,7 @@ export class DetailTruyen implements OnInit {
     ngOnInit(): void {
       const id = this.route.snapshot.paramMap.get('id');
       if (id) {
-        const truyenID = parseInt(id, 10)
+        const truyenID = parseInt(id, 10) // parse id sang integer để truyền vào getDetail()
         this.truyenService.getDetail(truyenID).subscribe((data:any) =>{
             // console.log(data)
             this.detailTruyen = data;

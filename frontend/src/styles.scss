@@ -28,3 +28,7 @@
     background: #e9ecef;
     color: #495057;
 }
+
+.keep-newlines {
+  white-space: pre-wrap; /* Quan trọng: Giữ \n và cho phép ngắt dòng */
+}

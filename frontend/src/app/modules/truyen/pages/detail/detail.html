@@ -4,13 +4,10 @@
             <!-- Main Content -->
             <div class="col-lg-8">
                 <!-- Story Info Section -->
-                <div *ngIf="detailTruyen" class="card mb-4">
-                    <div class="card-header bg-secondary text-white">
-                        <h5 class="mb-0">THÔNG TIN TRUYỆN</h5>
-                    </div>
+                <div *ngIf="detailTruyen" class="card border-0 mb-4">
                     <div class="card-body">
                         <div class="row">
-                            <h1 class="text-primary mb-3">{{detailTruyen.title}}</h1>
+                            <h1 class="fs-2 text-primary mb-3">{{detailTruyen.title}}</h1>
                             <div class="col-md-6 col-sm-4 mb-3">
                                 <img src="{{detailTruyen.thumbnail_link}}" 
                                      class="img-fluid border" alt="{{detailTruyen.title}}">
@@ -58,7 +55,7 @@
                 <!-- Story Description -->
                 <div class="card mb-4">
                     <h3 class="card-header">Giới Thiệu : </h3>
-                    <div class="card-body">
+                    <div class="card-body keep-newlines">
                       {{detailTruyen.description}}
                     </div>
                 </div>
