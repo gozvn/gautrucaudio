@@ -22,8 +22,8 @@ export class TruyenService {
         }))   
     }
 
-    getDetail(){
-        const path = this.apiServerPaths.table.mg5spzij16k3hy9.records+"/966";
+    getDetail(id:number){
+        const path = this.apiServerPaths.table.mg5spzij16k3hy9.records + "/" + id;
         return this.backendService.get(path,{},map((result:any) => {
             // console.log(result) //
             return result ?? []; //

@@ -10,15 +10,14 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-3 col-sm-4 mb-3">
+                            <h1 class="text-primary mb-3">{{detailTruyen.title}}</h1>
+                            <div class="col-md-6 col-sm-4 mb-3">
                                 <img src="{{detailTruyen.thumbnail_link}}" 
                                      class="img-fluid border" alt="{{detailTruyen.title}}">
                             </div>
-                            <div class="col-md-9 col-sm-8">
-                                <h3 class="text-primary mb-3">{{detailTruyen.title}}</h3>
-                                
+                            <div class="col-md-6 col-sm-8">
                                 <!-- Rating Stars -->
-                                <div class="mb-3">
+                                <!-- <div class="mb-3">
                                     <span class="text-warning">
                                         <i class="bi bi-star-fill"></i>
                                         <i class="bi bi-star-fill"></i>
@@ -27,31 +26,29 @@
                                         <i class="bi bi-star"></i>
                                     </span>
                                     <small class="text-muted ms-2">Chưa có đánh giá nào, bạn hãy là người đầu tiên đánh giá truyện này!</small>
-                                </div>
-
+                                </div> -->
                                 <!-- Action Buttons -->
                                 <div class="mb-3">
-                                    <button class="btn btn-success me-2 mb-2">
+                                    <button class="btn btn-success me-1 mb-2">
                                         <i class="bi bi-headphones"></i> Nghe bộ truyện này
                                     </button>
-                                    <button class="btn btn-primary me-2 mb-2">
+                                    <button class="btn btn-primary me-1 mb-2">
                                         <i class="bi bi-book"></i> Đọc bộ truyện này
                                     </button>
-                                    <button class="btn btn-outline-danger mb-2">
+                                    <!-- <button class="btn btn-outline-danger mb-2">
                                         <i class="bi bi-heart"></i> Yêu thích
-                                    </button>
+                                    </button> -->
                                 </div>
-
-                                <!-- Story Details -->
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <p><strong>Tác giả:</strong> <span class="text-info">Bach Tố Chúc Bach</span></p>
-                                        <p><strong>Thể loại:</strong> <span class="text-info">Huyền Huyễn, Dị Năng, Nữ Cường, Khác, Hệ Thống</span></p>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <p><strong>Nguồn:</strong> <span class="text-info">Cà Mèn</span></p>
-                                        <p><strong>Trạng thái:</strong> <span class="badge bg-success">Full</span></p>
-                                    </div>
+                            </div>
+                            <!-- Story TAGS -->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p><strong>Tác giả:</strong> <span class="text-info">Bach Tố Chúc Bach</span></p>
+                                    <p><strong>Thể loại:</strong> <span class="text-info">Huyền Huyễn, Dị Năng, Nữ Cường, Khác, Hệ Thống</span></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p><strong>Nguồn:</strong> <span class="text-info">Cà Mèn</span></p>
+                                    <p><strong>Trạng thái:</strong> <span class="badge bg-success">Full</span></p>
                                 </div>
                             </div>
                         </div>
@@ -60,30 +57,9 @@
 
                 <!-- Story Description -->
                 <div class="card mb-4">
+                    <h3 class="card-header">Giới Thiệu : </h3>
                     <div class="card-body">
-                        <p class="lead">Nếu bạn có một mảng sống thú vị trong thế giới hai chiều, bạn sẽ làm gì?</p>
-                        
-                        <p>Sau khi đột tử, Lê Lê nhận được một hệ thống. Hệ thống trao cho cô cơ hội sống lại, cho phép cô được vào thế giới truyện tranh trong giấc mơ và quay về thực tại vào ban ngày, tự do đến mức thậm chí có thể đổi chỗ.</p>
-                        
-                        <p>Điều kiện là nếu không có đủ độ nổi tiếng, cô vẫn sẽ chết.</p>
-                        
-                        <p>Lê Lê suy nghĩ một lúc, rồi giật đầu nói về hệ thống: "Thận mật, có hỗ trợ đổi mặt không mất tiền không?"</p>
-                        
-                        <p class="text-muted">Cơ muốn có một gương mặt đẹp trai!</p>
-                        
-                        <p>Trong một xã hội đi năng nơi kẻ mạnh làm chủ, bông nhiên xuất hiện một "bóng ma" không có quá khứ.</p>
-                        
-                        <p>"Hắn" là kẻ bảo thú đầy bí thương trong truyện tranh, một kẻ có chấp và điển cuồng.</p>
-                        
-                        <p>"Hắn" dùng nụ cười để che giấu, lây lứt áo làm thoát.</p>
-                        
-                        <p>"Hắn" đương như ngọng cuồng phong tùng, nhưng chẳng ai thấy được hơn dao có độc trong tâm hồn "hắn".</p>
-                        
-                        <p class="text-muted">Độc giả khóc rống vì hắn, sáng tác fanart và fanfic để thể hiện long yêu mến, thậm chí hắn có thể giới...</p>
-                        
-                        <div class="text-end">
-                            <a href="#" class="text-primary">Xem thêm »</a>
-                        </div>
+                      {{detailTruyen.description}}
                     </div>
                 </div>
 
