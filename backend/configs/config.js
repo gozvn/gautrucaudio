@@ -1,6 +1,7 @@
 require('dotenv').config()
 module.exports = {
     app: {
+        pub_token: process.env.PUBLIC_TOKEN || '',
         env: process.env.APP_ENV || 'development',
         name: process.env.APP_NAME || 'App name',
         ruleCheckerMiddlewareDetection: 'ruleCheckerMiddlewaregmsvdr5PNmw3uK9mEVqsFyQRUMStvVJx6qqWbdL4k6pZXGKarHGrz88FYh63y94x',

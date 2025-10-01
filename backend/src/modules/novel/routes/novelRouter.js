@@ -1,6 +1,6 @@
 import express from 'express';
 import { Sequelize } from 'sequelize';
-import config from '../../../configs/config.js';
+import config from '../../../../configs/config.js';
 
 const router = express.Router();
 

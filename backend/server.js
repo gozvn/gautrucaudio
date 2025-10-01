@@ -1,5 +1,5 @@
 const express = require('express')
-const novelRouter = require('./src/modules/novel/novelRouter').default
+const novelRouter = require('./src/modules/novel/routes/novelRouter').default
 const userRouter = require('./src/modules/user/userRouter').default
 
 const app = express()
