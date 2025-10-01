@@ -4,10 +4,12 @@ import { CommonModule,isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { Footer } from '../../../../layouts/default/footer/footer';
 import { Header } from '../../../../layouts/default/header/header';
+import { Sidebar } from '../../../../layouts/default/sidebar/sidebar';
+
 
 @Component({
   selector: 'app-list',
-  imports: [CommonModule,Header,Footer],
+  imports: [CommonModule,Header,Footer,Sidebar],
   templateUrl: './list.html',
   styleUrl: './list.scss'
 })
