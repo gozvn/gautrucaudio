@@ -1,7 +1,7 @@
 import express from 'express';
 import { Sequelize } from 'sequelize';
 import config from '../../../../configs/config.js';
-
+import authBasic from '../../auth/auth.js'; 
 const router = express.Router();
 
 // Tạo kết nối CSDL từ config
@@ -29,7 +29,7 @@ export default router;
 // Test kết nối khi load module
 testConnection();
 
-router.get('/', async (req, res) => {
+router.get('/', authBasic, async (req, res) => {
   try {
     // truy vấn danh sách novels (giả sử có bảng novels)
     const [novels] = await sequelize.query(`

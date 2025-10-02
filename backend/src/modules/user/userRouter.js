@@ -1,6 +1,7 @@
 import express from 'express';
 import { Sequelize } from 'sequelize';
 import config from '../../../configs/config.js';
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
@@ -15,6 +16,19 @@ const sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.p
 });
 
 export default router;
+
+router.get('/ping', (req, res) => {
+  const payload = { hello : 'world' };
+  const access_token = jwt.sign(payload, config.jwt.secret, { expiresIn: '1h' });
+  res.status(200).json({
+    status: 'success',
+    code: 200,
+    message: 'Pong from User Service',
+    data: {
+      access_token
+    }
+  });
+});
 
 router.get('/', async (req, res) => {
   try {
