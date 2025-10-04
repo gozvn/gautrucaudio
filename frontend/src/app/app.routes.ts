@@ -9,5 +9,13 @@ export const routes: Routes = [
     }, // Load module Truyen.
     { 
         path : 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule), title : 'Dashboard - Quản Trị' 
-    }, // Load module Dashboard
+    }, 
+    {
+        path : 'error' , loadChildren:() => import('./modules/error/error-module').then(m => m.ErrorModule)
+    },
+    {
+        path: '**',
+        redirectTo : 'error/404-page'
+        // Alternatively, use a component: component: NotFoundComponent
+    },
 ];
