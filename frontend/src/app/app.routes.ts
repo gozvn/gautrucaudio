@@ -1,6 +1,13 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-    { path : '', loadChildren: () => import('./modules/home/services/home.module').then(m => m.HomeModule),title : 'Trang Chủ'}, // Load module Home.
-    { path : 'truyen', loadChildren: () => import('./modules/truyen/truyen.module').then(m => m.TruyenModule), title : 'Danh sách Truyện' } // Load module Truyen.
+    { 
+        path : '', loadChildren: () => import('./modules/home/services/home.module').then(m => m.HomeModule),title : 'Trang Chủ'
+    }, // Load module Home.
+    { 
+        path : 'truyen', loadChildren: () => import('./modules/truyen/truyen.module').then(m => m.TruyenModule), title : 'Danh sách Truyện'
+    }, // Load module Truyen.
+    { 
+        path : 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule), title : 'Dashboard - Quản Trị' 
+    }, // Load module Dashboard
 ];
