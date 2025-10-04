@@ -1,17 +1,9 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { List } from './pages/list/list';
-import { DetailTruyen } from './pages/detail/detail';
-
-const routes: Routes = [
-  { path: '',component: List },
-  { path: ':id', component: DetailTruyen},
-  
-];
+import { TruyenRouting } from './truyen.routing.module';
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  declarations:[],
+  imports: [TruyenRouting]
 })
 
 export class TruyenModule {
