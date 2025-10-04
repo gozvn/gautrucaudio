@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { TruyenRouting } from './truyen.routing.module';
+import { TruyenRouting } from './truyen-routing';
 
 @NgModule({
   declarations:[],
