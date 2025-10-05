@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router) {}
+  
+  constructor(private router: Router,private auth: AuthenticationService) {
+
+  }
 
   canActivate(): boolean {
-    // const token = localStorage.getItem('token');
-    const ve:string = "vi1p";
-    if (ve === "vip") {
-      return true; // Cho phép vào route
+    if (this.auth.isAuthenticated()) {
+      return true;
     }
-
-    // Nếu chưa đăng nhập → chuyển hướng về trang login
     this.router.navigate(['/login']);
     return false;
   }
+
 }
