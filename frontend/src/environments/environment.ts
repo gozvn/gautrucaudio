@@ -2,7 +2,7 @@ import { table } from "console"
 import path from "path"
 
 export const environment = { // file chung he thong
-    
+    appPrefix : "",
     backendServer: {
         host: 'dragonball.gozvn.com',
         port : 443,
