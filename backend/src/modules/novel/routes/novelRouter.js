@@ -24,12 +24,12 @@ const testConnection = async () => {
   }
 };
 
-export default router;
+
 
 // Test kết nối khi load module
 testConnection();
 
-router.get('/', authBasic, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     // truy vấn danh sách novels (giả sử có bảng novels)
     const [novels] = await sequelize.query(`
@@ -190,3 +190,4 @@ router.delete('/delete/:id', async (req, res) => {
   }
 });
 
+export default router;

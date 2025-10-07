@@ -1,5 +1,7 @@
-require('dotenv').config()
-module.exports = {
+import dotenv from 'dotenv';
+dotenv.config();
+
+const config = {
     app: {
         pub_token: process.env.PUBLIC_TOKEN || '',
         env: process.env.APP_ENV || 'development',
@@ -214,3 +216,5 @@ module.exports = {
         }
     }
 }
+
+export default config;
