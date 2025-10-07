@@ -87,7 +87,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/create', async (req, res) => {
+router.post('/create',authBasic, async (req, res) => {
   try {
     const { title, title_slug, description, author, content } = req.body;
     
