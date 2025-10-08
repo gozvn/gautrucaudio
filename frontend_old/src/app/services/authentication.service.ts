@@ -37,6 +37,7 @@ export class AuthenticationService {
 
     isAuthenticated(): boolean {
         if (isPlatformBrowser(this.platformId)) {
+        console.log(localStorage)
         return !!localStorage.getItem('token');
         }
         return false; // SSR không có localStorage → luôn trả false

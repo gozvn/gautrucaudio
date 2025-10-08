@@ -4,10 +4,12 @@ import { Header } from '../../../../layouts/default/header/header';
 import { FormBuilder, FormGroup,ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from '../../../../services/authentication.service';
 import { CommonModule } from '@angular/common';
+import { DashboardHeader } from '../../../dashboard/pages/dashboard-header/dashboard-header';
+import { DashboardSidebar } from '../../../dashboard/pages/dashboard-sidebar/dashboard-sidebar';
 
 @Component({
   selector: 'app-login',
-  imports: [Header,Footer,CommonModule,ReactiveFormsModule],
+  imports: [CommonModule,ReactiveFormsModule,DashboardHeader,DashboardSidebar],
   templateUrl: './login.html',
   styleUrl: './login.scss'
 })
