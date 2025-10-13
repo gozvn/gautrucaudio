@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách truyện - Gấu Trúc Audio</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/custom.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img height="32px" src="assets/img/logo-gautruc-audio.png"> Gấu Trúc Audio
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i>Trang chủ</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-th-large me-1"></i>Thể loại
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="novels.html?category=tien-hiep"><i class="fas fa-dragon me-2"></i>Tiên hiệp</a></li>
+                            <li><a class="dropdown-item" href="novels.html?category=ngon-tinh"><i class="fas fa-heart me-2"></i>Ngôn tình</a></li>
+                            <li><a class="dropdown-item" href="novels.html?category=kinh-di"><i class="fas fa-ghost me-2"></i>Kinh dị</a></li>
+                            <li><a class="dropdown-item" href="novels.html?category=hai-huoc"><i class="fas fa-laugh me-2"></i>Hài hước</a></li>
+                            <li><a class="dropdown-item" href="novels.html?category=manga"><i class="fas fa-book me-2"></i>Manga</a></li>
+                            <li><a class="dropdown-item" href="novels.html?category=manhwa"><i class="fas fa-bookmark me-2"></i>Manhwa</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="novels.html?filter=top"><i class="fas fa-trophy me-1"></i>Top truyện</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="novels.html?type=audio"><i class="fas fa-headphones me-1"></i>Audio</a>
+                    </li>
+                </ul>
+                
+                <form class="d-flex me-3" action="search.html" method="GET">
+                    <input class="form-control me-2" type="search" name="q" placeholder="Tìm truyện...">
+                    <button class="btn btn-outline-light" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+                
+                <div class="navbar-nav">
+                    <a class="nav-link" href="user-profile.html"><i class="fas fa-user-circle me-1"></i>Tài khoản</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container my-4">
+        <div class="row">
+            <!-- Left Sidebar - Filters -->
+            <div class="col-lg-3 mb-4">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="fas fa-filter me-2"></i>Bộ lọc</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Category Filter -->
+                        <div class="mb-4">
+                            <h6 class="fw-bold">Thể loại</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="tien-hiep" id="category-tien-hiep">
+                                <label class="form-check-label" for="category-tien-hiep">
+                                    <i class="fas fa-dragon me-1"></i>Tiên hiệp
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="ngon-tinh" id="category-ngon-tinh">
+                                <label class="form-check-label" for="category-ngon-tinh">
+                                    <i class="fas fa-heart me-1"></i>Ngôn tình
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="kinh-di" id="category-kinh-di">
+                                <label class="form-check-label" for="category-kinh-di">
+                                    <i class="fas fa-ghost me-1"></i>Kinh dị
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="hai-huoc" id="category-hai-huoc">
+                                <label class="form-check-label" for="category-hai-huoc">
+                                    <i class="fas fa-laugh me-1"></i>Hài hước
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="manga" id="category-manga">
+                                <label class="form-check-label" for="category-manga">
+                                    <i class="fas fa-book me-1"></i>Manga
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="manhwa" id="category-manhwa">
+                                <label class="form-check-label" for="category-manhwa">
+                                    <i class="fas fa-bookmark me-1"></i>Manhwa
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Status Filter -->
+                        <div class="mb-4">
+                            <h6 class="fw-bold">Trạng thái</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="status" value="" id="status-all" checked>
+                                <label class="form-check-label" for="status-all">
+                                    Tất cả
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="status" value="ongoing" id="status-ongoing">
+                                <label class="form-check-label" for="status-ongoing">
+                                    <i class="fas fa-sync text-warning me-1"></i>Đang cập nhật
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="status" value="completed" id="status-completed">
+                                <label class="form-check-label" for="status-completed">
+                                    <i class="fas fa-check-circle text-success me-1"></i>Hoàn thành
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="status" value="paused" id="status-paused">
+                                <label class="form-check-label" for="status-paused">
+                                    <i class="fas fa-pause-circle text-danger me-1"></i>Tạm dừng
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Type Filter -->
+                        <div class="mb-4">
+                            <h6 class="fw-bold">Loại truyện</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="text" id="type-text">
+                                <label class="form-check-label" for="type-text">
+                                    <i class="fas fa-file-text me-1"></i>Text
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="audio" id="type-audio">
+                                <label class="form-check-label" for="type-audio">
+                                    <i class="fas fa-headphones me-1"></i>Audio
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="comic" id="type-comic">
+                                <label class="form-check-label" for="type-comic">
+                                    <i class="fas fa-images me-1"></i>Comic
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-primary w-100 mb-2" onclick="applyFilters()">
+                            <i class="fas fa-search me-1"></i>Áp dụng bộ lọc
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary w-100" onclick="clearFilters()">
+                            <i class="fas fa-undo me-1"></i>Xóa bộ lọc
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Top Stories Widget -->
+                <div class="card mt-4">
+                    <div class="card-header bg-success text-white">
+                        <h6 class="mb-0"><i class="fas fa-fire me-2"></i>Truyện hot</h6>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="top-item d-flex align-items-center p-3">
+                            <div class="badge bg-warning text-dark me-3 fs-6">1</div>
+                            <img src="assets/img/no-image.jpeg" class="me-3 sidebar-cover" style="border-radius: 4px;" alt="Hot 1">
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1 small">Đấu Phá Thương Khung</h6>
+                                <small class="text-muted">999,999 lượt đọc</small>
+                            </div>
+                        </div>
+                        <div class="top-item d-flex align-items-center p-3">
+                            <div class="badge bg-secondary me-3 fs-6">2</div>
+                            <img src="assets/img/no-image.jpeg" class="me-3 sidebar-cover" style="border-radius: 4px;" alt="Hot 2">
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1 small">Solo Leveling</h6>
+                                <small class="text-muted">888,888 lượt đọc</small>
+                            </div>
+                        </div>
+                        <div class="top-item d-flex align-items-center p-3">
+                            <div class="badge bg-danger me-3 fs-6">3</div>
+                            <img src="assets/img/no-image.jpeg" class="me-3 sidebar-cover" style="border-radius: 4px;" alt="Hot 3">
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1 small">Tower of God</h6>
+                                <small class="text-muted">777,777 lượt đọc</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Content - Novel List -->
+            <div class="col-lg-9">
+                <!-- Header with sorting -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h2 class="section-title mb-2"><i class="fas fa-book text-primary me-2"></i>Danh sách truyện</h2>
+                        <p class="text-muted mb-0">Tìm thấy <strong>1,234</strong> truyện</p>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <select class="form-select form-select-sm" style="width: auto;" onchange="sortBy(this.value)">
+                            <option value="latest">Mới nhất</option>
+                            <option value="popular">Phổ biến nhất</option>
+                            <option value="views">Lượt xem cao</option>
+                            <option value="rating">Đánh giá cao</option>
+                            <option value="name">Tên A-Z</option>
+                            <option value="completed">Hoàn thành</option>
+                        </select>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-outline-primary btn-sm active" onclick="toggleView('grid')">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-primary btn-sm" onclick="toggleView('list')">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid View -->
+                <div id="grid-view" class="row g-4 main-stories">
+                    <!-- Row 1 -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card story-card">
+                            <div class="position-relative">
+                                <img src="assets/img/no-image.jpeg" class="card-img-top book-cover" alt="Thần Mộ">
+                                <div class="badge-overlay">
+                                    <span class="badge badge-full">Full</span>
+                                </div>
+                                <div class="heart-overlay">
+                                    <button class="btn btn-outline-danger btn-sm">
+                                        <i class="fas fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Thần Mộ</h5>
+                                <p class="card-text small text-muted mb-1">Tác giả: Thần Cơ</p>
+                                <p class="card-text small mb-2">
+                                    <span class="badge bg-primary">Tiên hiệp</span>
+                                    <span class="badge bg-success">Audio</span>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card story-card">
+                            <div class="position-relative">
+                                <img src="assets/img/no-image.jpeg" class="card-img-top book-cover" alt="Hoàn Mỹ Thế Giới">
+                                <div class="badge-overlay">
+                                    <span class="badge bg-warning">Hot</span>
+                                </div>
+                                <div class="heart-overlay">
+                                    <button class="btn btn-outline-danger btn-sm">
+                                        <i class="fas fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Hoàn Mỹ Thế Giới</h5>
+                                <p class="card-text small text-muted mb-1">Tác giả: Thần Đông</p>
+                                <p class="card-text small mb-2">
+                                    <span class="badge bg-primary">Tiên hiệp</span>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card story-card">
+                            <div class="position-relative">
+                                <img src="assets/img/no-image.jpeg" class="card-img-top book-cover" alt="Tower of God">
+                                <div class="heart-overlay">
+                                    <button class="btn btn-outline-danger btn-sm">
+                                        <i class="fas fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Tower of God</h5>
+                                <p class="card-text small text-muted mb-1">Tác giả: SIU</p>
+                                <p class="card-text small mb-2">
+                                    <span class="badge bg-info">Manhwa</span>
+                                    <span class="badge bg-success">Audio</span>
+                                </p>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card story-card">
+                            <div class="position-relative">
+                                <img src="assets/img/no-image.jpeg" class="card-img-top book-cover" alt="Demon Slayer">
+                                <div class="heart-overlay">
+                                    <button class="btn btn-outline-danger btn-sm">
+                                        <i class="fas fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Demon Slayer</h5>
+                                <p class="card-text small text-muted mb-1">Tác giả: Koyoharu Gotouge</p>
+                                <p class="card-text small mb-2">
+                                    <span class="badge bg-secondary">Manga</span>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 2 -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card story-card">
+                            <div class="position-relative">
+                                <img src="assets/img/no-image.jpeg" class="card-img-top book-cover" alt="Tà Đế Cuồng Phi">
+                                <div class="heart-overlay">
+                                    <button class="btn btn-outline-danger btn-sm">
+                                        <i class="fas fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Tà Đế Cuồng Phi</h5>
+                                <p class="card-text small text-muted mb-1">Tác giả: Phong Lưu</p>
+                                <p class="card-text small mb-2">
+                                    <span class="badge bg-danger">Ngôn tình</span>
+                                    <span class="badge bg-success">Audio</span>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card story-card">
+                            <div class="position-relative">
+                                <img src="assets/img/no-image.jpeg" class="card-img-top book-cover" alt="My Hero Academia">
+                                <div class="heart-overlay">
+                                    <button class="btn btn-outline-danger btn-sm">
+                                        <i class="fas fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">My Hero Academia</h5>
+                                <p class="card-text small text-muted mb-1">Tác giả: Kohei Horikoshi</p>
+                                <p class="card-text small mb-2">
+                                    <span class="badge bg-secondary">Manga</span>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card story-card">
+                            <div class="position-relative">
+                                <img src="assets/img/no-image.jpeg" class="card-img-top book-cover" alt="Black Clover">
+                                <div class="heart-overlay">
+                                    <button class="btn btn-outline-danger btn-sm">
+                                        <i class="fas fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Black Clover</h5>
+                                <p class="card-text small text-muted mb-1">Tác giả: Yuki Tabata</p>
+                                <p class="card-text small mb-2">
+                                    <span class="badge bg-secondary">Manga</span>
+                                </p>
+ 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card story-card">
+                            <div class="position-relative">
+                                <img src="assets/img/no-image.jpeg" class="card-img-top book-cover" alt="One Piece">
+                                <div class="badge-overlay">
+                                    <span class="badge bg-warning">Hot</span>
+                                </div>
+                                <div class="heart-overlay">
+                                    <button class="btn btn-outline-danger btn-sm">
+                                        <i class="fas fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">One Piece</h5>
+                                <p class="card-text small text-muted mb-1">Tác giả: Eiichiro Oda</p>
+                                <p class="card-text small mb-2">
+                                    <span class="badge bg-secondary">Manga</span>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- List View (hidden by default) -->
+                <div id="list-view" class="d-none">
+                    <div class="card mb-3">
+                        <div class="row g-0 align-items-center">
+                            <div class="col-md-2">
+                                <img src="assets/img/no-image.jpeg" class="img-fluid h-100" style="aspect-ratio: 2/3; object-fit: cover;" alt="Thần Mộ">
+                            </div>
+                            <div class="col-md-10">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-8">
+                                            <h5 class="card-title">Thần Mộ</h5>
+                                            <p class="text-muted mb-1">Tác giả: Thần Cơ</p>
+                                            <p class="small mb-2">
+                                                <span class="badge bg-primary">Tiên hiệp</span>
+                                                <span class="badge badge-full">Full</span>
+                                                <span class="badge bg-success">Audio</span>
+                                            </p>
+                                            <p class="small text-truncate">Một câu chuyện về hành trình tu luyện của thiếu niên Thần Mộ...</p>
+                                        </div>
+                                        <div class="col-md-4 text-end">
+                                            <small class="text-success d-block mb-2"><i class="fas fa-check-circle me-1"></i>Hoàn thành</small>
+                                            <small class="text-muted d-block mb-2"><i class="fas fa-eye me-1"></i>999,999 lượt xem</small>
+                                            <small class="text-muted d-block mb-3"><i class="fas fa-clock me-1"></i>Cập nhật: 2 giờ trước</small>
+                                            <div class="d-flex gap-2 justify-content-end">
+                                                <button class="btn btn-primary btn-sm" onclick="location.href='novel-detail.html?id=1'">Đọc ngay</button>
+                                                <button class="btn btn-outline-danger btn-sm"><i class="fas fa-heart"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="row g-0 align-items-center">
+                            <div class="col-md-2">
+                                <img src="assets/img/no-image.jpeg" class="img-fluid h-100" style="aspect-ratio: 2/3; object-fit: cover;" alt="Hoàn Mỹ Thế Giới">
+                            </div>
+                            <div class="col-md-10">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-8">
+                                            <h5 class="card-title">Hoàn Mỹ Thế Giới</h5>
+                                            <p class="text-muted mb-1">Tác giả: Thần Đông</p>
+                                            <p class="small mb-2">
+                                                <span class="badge bg-primary">Tiên hiệp</span>
+                                                <span class="badge bg-warning">Hot</span>
+                                            </p>
+                                            <p class="small text-truncate">Câu chuyện về một thế giới hoàn mỹ nơi mà...</p>
+                                        </div>
+                                        <div class="col-md-4 text-end">
+                                            <small class="text-warning d-block mb-2"><i class="fas fa-sync me-1"></i>Đang cập nhật</small>
+                                            <small class="text-muted d-block mb-2"><i class="fas fa-eye me-1"></i>888,888 lượt xem</small>
+                                            <small class="text-muted d-block mb-3"><i class="fas fa-clock me-1"></i>Cập nhật: 5 giờ trước</small>
+                                            <div class="d-flex gap-2 justify-content-end">
+                                                <button class="btn btn-primary btn-sm" onclick="location.href='novel-detail.html?id=2'">Đọc ngay</button>
+                                                <button class="btn btn-outline-danger btn-sm"><i class="fas fa-heart"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <nav class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <span class="page-link">Trước</span>
+                        </li>
+                        <li class="page-item active">
+                            <span class="page-link">1</span>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="novels.html?page=2">2</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="novels.html?page=3">3</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="novels.html?page=4">4</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="novels.html?page=5">5</a>
+                        </li>
+                        <li class="page-item">
+                            <span class="page-link">...</span>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="novels.html?page=50">50</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="novels.html?page=2">Sau</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- Show results info -->
+                <div class="text-center text-muted mt-3">
+                    <small>Hiển thị 1-20 của 1,234 kết quả</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-5 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <h5>
+                        <i class="fas fa-book-open me-2"></i>Gấu Trúc Audio
+                    </h5>
+                    <p class="small">Website đọc truyện online miễn phí với kho tàng truyện tranh và tiểu thuyết phong phú.</p>
+                    <div class="d-flex gap-2">
+                        <a href="#" class="text-light"><i class="fab fa-facebook fs-4"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-twitter fs-4"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-instagram fs-4"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-youtube fs-4"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 mb-4">
+                    <h6><i class="fas fa-list me-2"></i>Thể loại truyện</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="novels.html?category=tien-hiep" class="text-light text-decoration-none"><i class="fas fa-dragon me-1"></i>Tiên hiệp</a></li>
+                        <li><a href="novels.html?category=ngon-tinh" class="text-light text-decoration-none"><i class="fas fa-heart me-1"></i>Ngôn tình</a></li>
+                        <li><a href="novels.html?category=kinh-di" class="text-light text-decoration-none"><i class="fas fa-ghost me-1"></i>Kinh dị</a></li>
+                        <li><a href="novels.html?category=hai-huoc" class="text-light text-decoration-none"><i class="fas fa-laugh me-1"></i>Hài hước</a></li>
+                        <li><a href="novels.html?category=manga" class="text-light text-decoration-none"><i class="fas fa-book me-1"></i>Manga</a></li>
+                        <li><a href="novels.html?category=manhwa" class="text-light text-decoration-none"><i class="fas fa-bookmark me-1"></i>Manhwa</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-3 mb-4">
+                    <h6><i class="fas fa-link me-2"></i>Liên kết</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="#" class="text-light text-decoration-none"><i class="fas fa-info-circle me-1"></i>Giới thiệu</a></li>
+                        <li><a href="#" class="text-light text-decoration-none"><i class="fas fa-envelope me-1"></i>Liên hệ</a></li>
+                        <li><a href="#" class="text-light text-decoration-none"><i class="fas fa-file-contract me-1"></i>Điều khoản sử dụng</a></li>
+                        <li><a href="#" class="text-light text-decoration-none"><i class="fas fa-shield-alt me-1"></i>Chính sách bảo mật</a></li>
+                        <li><a href="#" class="text-light text-decoration-none"><i class="fas fa-question-circle me-1"></i>Hướng dẫn</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-3 mb-4">
+                    <h6><i class="fas fa-bell me-2"></i>Nhận thông báo</h6>
+                    <p class="small">Đăng ký để nhận thông báo truyện mới</p>
+                    <div class="input-group input-group-sm">
+                        <input type="email" class="form-control" placeholder="Email của bạn">
+                        <button class="btn btn-info" type="button">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="mt-3">
+                        <img src="assets/img/no-image.jpeg" class="img-fluid me-2" style="max-width: 120px; height: 40px; object-fit: cover;" alt="App Store">
+                        <img src="assets/img/no-image.jpeg" class="img-fluid" style="max-width: 120px; height: 40px; object-fit: cover;" alt="Play Store">
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-4">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="small mb-0">&copy; 2024 Gấu Trúc Audio. Tất cả quyền được bảo lưu.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="small mb-0">
+                        <a href="#" class="text-light text-decoration-none me-3">Điều khoản</a>
+                        <a href="#" class="text-light text-decoration-none me-3">Bảo mật</a>
+                        <a href="#" class="text-light text-decoration-none">Cookies</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+    <script>
+        // Toggle between grid and list view
+        function toggleView(viewType) {
+            const gridView = document.getElementById('grid-view');
+            const listView = document.getElementById('list-view');
+            const gridBtn = document.querySelector('[onclick="toggleView(\'grid\')"]');
+            const listBtn = document.querySelector('[onclick="toggleView(\'list\')"]');
+            
+            if (viewType === 'grid') {
+                gridView.classList.remove('d-none');
+                listView.classList.add('d-none');
+                gridBtn.classList.add('active');
+                listBtn.classList.remove('active');
+            } else {
+                gridView.classList.add('d-none');
+                listView.classList.remove('d-none');
+                listBtn.classList.add('active');
+                gridBtn.classList.remove('active');
+            }
+        }
+
+        // Sort by selection
+        function sortBy(value) {
+            console.log('Sorting by:', value);
+            // Here you would implement the sorting logic
+            // For demo purposes, we'll just log the value
+        }
+
+        // Apply filters
+        function applyFilters() {
+            const categories = [];
+            const status = document.querySelector('input[name="status"]:checked').value;
+            const types = [];
+            
+            // Get selected categories
+            document.querySelectorAll('input[id^="category-"]:checked').forEach(checkbox => {
+                categories.push(checkbox.value);
+            });
+            
+            // Get selected types
+            document.querySelectorAll('input[id^="type-"]:checked').forEach(checkbox => {
+                types.push(checkbox.value);
+            });
+            
+            console.log('Filters:', { categories, status, types });
+            // Here you would implement the filter logic
+        }
+
+        // Clear all filters
+        function clearFilters() {
+            // Uncheck all checkboxes
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            
+            // Reset status to "all"
+            document.getElementById('status-all').checked = true;
+            
+            console.log('Filters cleared');
+            // Here you would reload the page or reset the novel list
+        }
+
+        // Handle URL parameters for initial filter state
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category');
+            const filter = urlParams.get('filter');
+            const type = urlParams.get('type');
+            
+            if (category) {
+                const categoryCheckbox = document.getElementById(`category-${category}`);
+                if (categoryCheckbox) {
+                    categoryCheckbox.checked = true;
+                }
+            }
+            
+            if (type) {
+                const typeCheckbox = document.getElementById(`type-${type}`);
+                if (typeCheckbox) {
+                    typeCheckbox.checked = true;
+                }
+            }
+            
+            // Update page title based on filters
+            if (category || filter || type) {
+                let title = 'Danh sách truyện';
+                if (category) title += ` - ${category}`;
+                if (filter) title += ` - ${filter}`;
+                if (type) title += ` - ${type}`;
+                document.title = title + ' - Gấu Trúc Audio';
+            }
+        });
+    </script>
+</body>
+</html>

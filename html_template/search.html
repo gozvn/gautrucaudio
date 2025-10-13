@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm kiếm truyện - Gấu Trúc Audio</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/custom.css">
+    
+    <style>
+        .search-highlight {
+            background-color: #fff3cd;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .search-result-item {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        
+        .search-result-item:hover {
+            border-left-color: var(--primary-green);
+            background-color: rgba(26, 126, 99, 0.05);
+        }
+        
+        .search-meta {
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+        
+        .search-snippet {
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img height="32px" src="assets/img/logo-gautruc-audio.png"> Gấu Trúc Audio
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i>Trang chủ</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-th-large me-1"></i>Thể loại
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="novels.html?category=tien-hiep"><i class="fas fa-dragon me-2"></i>Tiên hiệp</a></li>
+                            <li><a class="dropdown-item" href="novels.html?category=ngon-tinh"><i class="fas fa-heart me-2"></i>Ngôn tình</a></li>
+                            <li><a class="dropdown-item" href="novels.html?category=kinh-di"><i class="fas fa-ghost me-2"></i>Kinh dị</a></li>
+                            <li><a class="dropdown-item" href="novels.html?category=hai-huoc"><i class="fas fa-laugh me-2"></i>Hài hước</a></li>
+                            <li><a class="dropdown-item" href="novels.html?category=manga"><i class="fas fa-book me-2"></i>Manga</a></li>
+                            <li><a class="dropdown-item" href="novels.html?category=manhwa"><i class="fas fa-bookmark me-2"></i>Manhwa</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="novels.html?filter=top"><i class="fas fa-trophy me-1"></i>Top truyện</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="novels.html?type=audio"><i class="fas fa-headphones me-1"></i>Audio</a>
+                    </li>
+                </ul>
+                
+                <form class="d-flex me-3" action="search.html" method="GET">
+                    <input class="form-control me-2" type="search" name="q" placeholder="Tìm truyện..." value="" id="search-input">
+                    <button class="btn btn-outline-light" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+                
+                <div class="navbar-nav">
+                    <a class="nav-link" href="user-profile.html"><i class="fas fa-user-circle me-1"></i>Tài khoản</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Header -->
+    <div class="bg-light py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="h3 mb-3">Kết quả tìm kiếm</h1>
+                    <form class="d-flex" action="search.html" method="GET">
+                        <input class="form-control me-2" type="search" name="q" placeholder="Tìm truyện, tác giả, thể loại..." value="" id="main-search-input">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search me-1"></i>Tìm kiếm
+                        </button>
+                    </form>
+                </div>
+                <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                    <div class="search-stats">
+                        <p class="mb-0 text-muted">Tìm thấy <strong id="result-count">237</strong> kết quả</p>
+                        <p class="mb-0 text-muted small">Thời gian tìm kiếm: 0.25 giây</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container my-4">
+        <div class="row">
+            <!-- Left Sidebar - Search Filters -->
+            <div class="col-lg-3 mb-4">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h6 class="mb-0"><i class="fas fa-filter me-2"></i>Lọc kết quả</h6>
+                    </div>
+                    <div class="card-body">
+                        <!-- Search Type -->
+                        <div class="mb-4">
+                            <h6 class="fw-bold">Tìm theo</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="searchType" value="all" id="search-all" checked>
+                                <label class="form-check-label" for="search-all">
+                                    Tất cả
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="searchType" value="title" id="search-title">
+                                <label class="form-check-label" for="search-title">
+                                    Tên truyện
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="searchType" value="author" id="search-author">
+                                <label class="form-check-label" for="search-author">
+                                    Tác giả
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="searchType" value="content" id="search-content">
+                                <label class="form-check-label" for="search-content">
+                                    Nội dung
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Category Filter -->
+                        <div class="mb-4">
+                            <h6 class="fw-bold">Thể loại</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="tien-hiep" id="category-tien-hiep">
+                                <label class="form-check-label" for="category-tien-hiep">
+                                    <i class="fas fa-dragon me-1"></i>Tiên hiệp
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="ngon-tinh" id="category-ngon-tinh">
+                                <label class="form-check-label" for="category-ngon-tinh">
+                                    <i class="fas fa-heart me-1"></i>Ngôn tình
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="kinh-di" id="category-kinh-di">
+                                <label class="form-check-label" for="category-kinh-di">
+                                    <i class="fas fa-ghost me-1"></i>Kinh dị
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="hai-huoc" id="category-hai-huoc">
+                                <label class="form-check-label" for="category-hai-huoc">
+                                    <i class="fas fa-laugh me-1"></i>Hài hước
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="manga" id="category-manga">
+                                <label class="form-check-label" for="category-manga">
+                                    <i class="fas fa-book me-1"></i>Manga
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="manhwa" id="category-manhwa">
+                                <label class="form-check-label" for="category-manhwa">
+                                    <i class="fas fa-bookmark me-1"></i>Manhwa
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Status Filter -->
+                        <div class="mb-4">
+                            <h6 class="fw-bold">Trạng thái</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="ongoing" id="status-ongoing">
+                                <label class="form-check-label" for="status-ongoing">
+                                    <i class="fas fa-sync text-warning me-1"></i>Đang cập nhật
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="completed" id="status-completed">
+                                <label class="form-check-label" for="status-completed">
+                                    <i class="fas fa-check-circle text-success me-1"></i>Hoàn thành
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="paused" id="status-paused">
+                                <label class="form-check-label" for="status-paused">
+                                    <i class="fas fa-pause-circle text-danger me-1"></i>Tạm dừng
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Type Filter -->
+                        <div class="mb-4">
+                            <h6 class="fw-bold">Loại truyện</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="text" id="type-text">
+                                <label class="form-check-label" for="type-text">
+                                    <i class="fas fa-file-text me-1"></i>Text
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="audio" id="type-audio">
+                                <label class="form-check-label" for="type-audio">
+                                    <i class="fas fa-headphones me-1"></i>Audio
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="comic" id="type-comic">
+                                <label class="form-check-label" for="type-comic">
+                                    <i class="fas fa-images me-1"></i>Comic
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-primary w-100 mb-2" onclick="applyFilters()">
+                            <i class="fas fa-search me-1"></i>Áp dụng bộ lọc
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary w-100" onclick="clearFilters()">
+                            <i class="fas fa-undo me-1"></i>Xóa bộ lọc
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Popular Searches -->
+                <div class="card mt-4">
+                    <div class="card-header bg-info text-white">
+                        <h6 class="mb-0"><i class="fas fa-fire me-2"></i>Tìm kiếm phổ biến</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex flex-wrap gap-2">
+                            <a href="search.html?q=đấu+phá+thương+khung" class="badge bg-primary text-decoration-none">Đấu Phá Thương Khung</a>
+                            <a href="search.html?q=solo+leveling" class="badge bg-info text-decoration-none">Solo Leveling</a>
+                            <a href="search.html?q=thần+mộ" class="badge bg-success text-decoration-none">Thần Mộ</a>
+                            <a href="search.html?q=tower+of+god" class="badge bg-warning text-decoration-none">Tower of God</a>
+                            <a href="search.html?q=one+piece" class="badge bg-danger text-decoration-none">One Piece</a>
+                            <a href="search.html?q=naruto" class="badge bg-secondary text-decoration-none">Naruto</a>
+                            <a href="search.html?q=tiên+hiệp" class="badge bg-dark text-decoration-none">Tiên hiệp</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Content - Search Results -->
+            <div class="col-lg-9">
+                <!-- Sort Options -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h2 class="section-title mb-0">
+                            <i class="fas fa-search text-primary me-2"></i>
+                            Kết quả cho: <span class="text-primary" id="search-query">"thần mộ"</span>
+                        </h2>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <select class="form-select form-select-sm" style="width: auto;" onchange="sortResults(this.value)">
+                            <option value="relevance">Liên quan nhất</option>
+                            <option value="latest">Mới nhất</option>
+                            <option value="popular">Phổ biến nhất</option>
+                            <option value="views">Lượt xem cao</option>
+                            <option value="rating">Đánh giá cao</option>
+                            <option value="name">Tên A-Z</option>
+                        </select>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-outline-primary btn-sm" onclick="toggleView('list')">
+                                <i class="fas fa-list"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-primary btn-sm active" onclick="toggleView('grid')">
+                                <i class="fas fa-th"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- List View Results -->
+                <div id="list-view" class="search-results">
+                    <!-- Result 1 -->
+                    <div class="card search-result-item mb-3">
+                        <div class="row g-0 align-items-center">
+                            <div class="col-md-2">
+                                <img src="assets/img/no-image.jpeg" class="img-fluid h-100" style="aspect-ratio: 2/3; object-fit: cover; max-height: 150px;" alt="Thần Mộ">
+                            </div>
+                            <div class="col-md-10">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <a href="novel-detail.html?id=1" class="text-decoration-none">
+                                            <span class="search-highlight">Thần</span> <span class="search-highlight">Mộ</span>
+                                        </a>
+                                    </h5>
+                                    <div class="search-meta mb-2">
+                                        <span class="me-3"><i class="fas fa-user me-1"></i>Tác giả: Thần Cơ</span>
+                                        <span class="me-3"><i class="fas fa-tags me-1"></i>Tiên hiệp</span>
+                                        <span class="me-3"><i class="fas fa-check-circle text-success me-1"></i>Hoàn thành</span>
+                                        <span><i class="fas fa-eye me-1"></i>999,999 lượt xem</span>
+                                    </div>
+                                    <p class="search-snippet mb-3">
+                                        Trong một thế giới huyền bí, nơi ma thuật và khoa học cùng tồn tại, một thiếu niên tên <span class="search-highlight">Thần</span> <span class="search-highlight">Mộ</span> đã được chọn bởi vận mệnh để trở thành người bảo vệ cho thế giới này...
+                                    </p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="d-flex gap-2">
+                                            <span class="badge bg-primary">Tiên hiệp</span>
+                                            <span class="badge bg-success">Audio</span>
+                                            <span class="badge badge-full">Full</span>
+                                        </div>
+                                        <div class="d-flex gap-2">
+                                            <button class="btn btn-primary btn-sm" onclick="location.href='novel-detail.html?id=1'">
+                                                <i class="fas fa-eye me-1"></i>Xem chi tiết
+                                            </button>
+                                            <button class="btn btn-outline-danger btn-sm">
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Result 2 -->
+                    <div class="card search-result-item mb-3">
+                        <div class="row g-0 align-items-center">
+                            <div class="col-md-2">
+                                <img src="assets/img/no-image.jpeg" class="img-fluid h-100" style="aspect-ratio: 2/3; object-fit: cover; max-height: 150px;" alt="Thần Ấn Vương Tọa">
+                            </div>
+                            <div class="col-md-10">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <a href="novel-detail.html?id=2" class="text-decoration-none">
+                                            <span class="search-highlight">Thần</span> Ấn Vương Tọa
+                                        </a>
+                                    </h5>
+                                    <div class="search-meta mb-2">
+                                        <span class="me-3"><i class="fas fa-user me-1"></i>Tác giả: Đường Gia Tam Thiếu</span>
+                                        <span class="me-3"><i class="fas fa-tags me-1"></i>Tiên hiệp</span>
+                                        <span class="me-3"><i class="fas fa-sync text-warning me-1"></i>Đang cập nhật</span>
+                                        <span><i class="fas fa-eye me-1"></i>756,432 lượt xem</span>
+                                    </div>
+                                    <p class="search-snippet mb-3">
+                                        Truyện kể về hành trình tu luyện của Long Haochen, một hiệp sĩ <span class="search-highlight">thần</span> thánh với khát khao bảo vệ nhân loại. Cậu gia nhập Liên minh Hiệp sĩ <span class="search-highlight">Thần</span> Thánh...
+                                    </p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="d-flex gap-2">
+                                            <span class="badge bg-primary">Tiên hiệp</span>
+                                            <span class="badge bg-warning">Hot</span>
+                                        </div>
+                                        <div class="d-flex gap-2">
+                                            <button class="btn btn-primary btn-sm" onclick="location.href='novel-detail.html?id=2'">
+                                                <i class="fas fa-eye me-1"></i>Xem chi tiết
+                                            </button>
+                                            <button class="btn btn-outline-danger btn-sm">
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Result 3 -->
+                    <div class="card search-result-item mb-3">
+                        <div class="row g-0 align-items-center">
+                            <div class="col-md-2">
+                                <img src="assets/img/no-image.jpeg" class="img-fluid h-100" style="aspect-ratio: 2/3; object-fit: cover; max-height: 150px;" alt="Đại Thiên Địa Thần Thoại">
+                            </div>
+                            <div class="col-md-10">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <a href="novel-detail.html?id=3" class="text-decoration-none">
+                                            Đại Thiên Địa <span class="search-highlight">Thần</span> Thoại
+                                        </a>
+                                    </h5>
+                                    <div class="search-meta mb-2">
+                                        <span class="me-3"><i class="fas fa-user me-1"></i>Tác giả: Phong Hỏa Hí Chư Hầu</span>
+                                        <span class="me-3"><i class="fas fa-tags me-1"></i>Tiên hiệp, Thần thoại</span>
+                                        <span class="me-3"><i class="fas fa-check-circle text-success me-1"></i>Hoàn thành</span>
+                                        <span><i class="fas fa-eye me-1"></i>654,321 lượt xem</span>
+                                    </div>
+                                    <p class="search-snippet mb-3">
+                                        Một câu chuyện về <span class="search-highlight">thần</span> thoại thời cổ đại, nơi các vị <span class="search-highlight">thần</span> cổ xưa và con người cùng tồn tại. Chủ nhân công Yang Tian được thừa kế sức mạnh của <span class="search-highlight">thần</span> linh...
+                                    </p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="d-flex gap-2">
+                                            <span class="badge bg-primary">Tiên hiệp</span>
+                                            <span class="badge bg-dark">Thần thoại</span>
+                                            <span class="badge bg-success">Audio</span>
+                                        </div>
+                                        <div class="d-flex gap-2">
+                                            <button class="btn btn-primary btn-sm" onclick="location.href='novel-detail.html?id=3'">
+                                                <i class="fas fa-eye me-1"></i>Xem chi tiết
+                                            </button>
+                                            <button class="btn btn-outline-danger btn-sm">
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Result 4 -->
+                    <div class="card search-result-item mb-3">
+                        <div class="row g-0 align-items-center">
+                            <div class="col-md-2">
+                                <img src="assets/img/no-image.jpeg" class="img-fluid h-100" style="aspect-ratio: 2/3; object-fit: cover; max-height: 150px;" alt="Thần Ma Chiến Trường">
+                            </div>
+                            <div class="col-md-10">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <a href="novel-detail.html?id=4" class="text-decoration-none">
+                                            <span class="search-highlight">Thần</span> Ma Chiến Trường
+                                        </a>
+                                    </h5>
+                                    <div class="search-meta mb-2">
+                                        <span class="me-3"><i class="fas fa-user me-1"></i>Tác giả: Hỏa Hồng</span>
+                                        <span class="me-3"><i class="fas fa-tags me-1"></i>Hành động, Phiêu lưu</span>
+                                        <span class="me-3"><i class="fas fa-sync text-warning me-1"></i>Đang cập nhật</span>
+                                        <span><i class="fas fa-eye me-1"></i>432,178 lượt xem</span>
+                                    </div>
+                                    <p class="search-snippet mb-3">
+                                        Cuộc chiến giữa <span class="search-highlight">thần</span> và ma đã kéo dài hàng thiên niên kỷ. Trong thế giới này, con người phải lựa chọn phe phái để sinh tồn. Liệu <span class="search-highlight">thần</span> hay ma sẽ thắng cuối cùng?
+                                    </p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="d-flex gap-2">
+                                            <span class="badge bg-danger">Hành động</span>
+                                            <span class="badge bg-info">Phiêu lưu</span>
+                                        </div>
+                                        <div class="d-flex gap-2">
+                                            <button class="btn btn-primary btn-sm" onclick="location.href='novel-detail.html?id=4'">
+                                                <i class="fas fa-eye me-1"></i>Xem chi tiết
+                                            </button>
+                                            <button class="btn btn-outline-danger btn-sm">
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Result 5 -->
+                    <div class="card search-result-item mb-3">
+                        <div class="row g-0 align-items-center">
+                            <div class="col-md-2">
+                                <img src="assets/img/no-image.jpeg" class="img-fluid h-100" style="aspect-ratio: 2/3; object-fit: cover; max-height: 150px;" alt="Thần Vương Ký">
+                            </div>
+                            <div class="col-md-10">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <a href="novel-detail.html?id=5" class="text-decoration-none">
+                                            <span class="search-highlight">Thần</span> Vương Ký
+                                        </a>
+                                    </h5>
+                                    <div class="search-meta mb-2">
+                                        <span class="me-3"><i class="fas fa-user me-1"></i>Tác giả: Đường Gia Tam Thiếu</span>
+                                        <span class="me-3"><i class="fas fa-tags me-1"></i>Tiên hiệp</span>
+                                        <span class="me-3"><i class="fas fa-check-circle text-success me-1"></i>Hoàn thành</span>
+                                        <span><i class="fas fa-eye me-1"></i>321,456 lượt xem</span>
+                                    </div>
+                                    <p class="search-snippet mb-3">
+                                        Hành trình trở thành <span class="search-highlight">thần</span> vương của Long Haochen. Với ý chí kiên cường và tài năng thiên bẩm, cậu vượt qua muôn vàn thử thách để đạt đến đỉnh cao quyền lực...
+                                    </p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="d-flex gap-2">
+                                            <span class="badge bg-primary">Tiên hiệp</span>
+                                            <span class="badge badge-full">Full</span>
+                                        </div>
+                                        <div class="d-flex gap-2">
+                                            <button class="btn btn-primary btn-sm" onclick="location.href='novel-detail.html?id=5'">
+                                                <i class="fas fa-eye me-1"></i>Xem chi tiết
+                                            </button>
+                                            <button class="btn btn-outline-danger btn-sm">
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid View (hidden by default) -->
+                <div id="grid-view" class="d-none">
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card story-card">
+                                <img src="assets/img/no-image.jpeg" class="card-img-top book-cover" alt="Thần Mộ">
+                                <div class="card-body">
+                                    <h5 class="card-title"><span class="search-highlight">Thần</span> <span class="search-highlight">Mộ</span></h5>
+                                    <p class="card-text small text-muted mb-1">Tác giả: Thần Cơ</p>
+                                    <p class="card-text small mb-2">
+                                        <span class="badge bg-primary">Tiên hiệp</span>
+                                        <span class="badge bg-success">Audio</span>
+                                    </p>
+                                    <div class="d-flex justify-content-between align-items-center mt-auto">
+                                        <small class="text-success"><i class="fas fa-check-circle me-1"></i>Hoàn thành</small>
+                                        <div class="d-flex gap-1">
+                                            <button class="btn btn-primary btn-sm" onclick="location.href='novel-detail.html?id=1'">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-outline-danger btn-sm">
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Add more grid items as needed -->
+                    </div>
+                </div>
+
+                <!-- No Results -->
+                <div id="no-results" class="text-center py-5" style="display: none;">
+                    <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                    <h4 class="text-muted">Không tìm thấy kết quả</h4>
+                    <p class="text-muted">Thử thay đổi từ khóa tìm kiếm hoặc bộ lọc để có kết quả tốt hơn.</p>
+                    <div class="mt-4">
+                        <h6>Gợi ý:</h6>
+                        <ul class="list-unstyled">
+                            <li>• Kiểm tra chính tả</li>
+                            <li>• Sử dụng từ khóa khác</li>
+                            <li>• Thử tìm kiếm theo tác giả</li>
+                            <li>• Xóa bộ lọc để mở rộng kết quả</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <nav class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <span class="page-link">Trước</span>
+                        </li>
+                        <li class="page-item active">
+                            <span class="page-link">1</span>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="search.html?q=thần+mộ&page=2">2</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="search.html?q=thần+mộ&page=3">3</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="search.html?q=thần+mộ&page=4">4</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="search.html?q=thần+mộ&page=5">5</a>
+                        </li>
+                        <li class="page-item">
+                            <span class="page-link">...</span>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="search.html?q=thần+mộ&page=12">12</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="search.html?q=thần+mộ&page=2">Sau</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- Show results info -->
+                <div class="text-center text-muted mt-3">
+                    <small>Hiển thị 1-10 của 237 kết quả cho "<strong id="pagination-query">thần mộ</strong>"</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-5 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <h5>
+                        <i class="fas fa-book-open me-2"></i>Gấu Trúc Audio
+                    </h5>
+                    <p class="small">Website đọc truyện online miễn phí với kho tàng truyện tranh và tiểu thuyết phong phú.</p>
+                    <div class="d-flex gap-2">
+                        <a href="#" class="text-light"><i class="fab fa-facebook fs-4"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-twitter fs-4"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-instagram fs-4"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-youtube fs-4"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 mb-4">
+                    <h6><i class="fas fa-list me-2"></i>Thể loại truyện</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="novels.html?category=tien-hiep" class="text-light text-decoration-none"><i class="fas fa-dragon me-1"></i>Tiên hiệp</a></li>
+                        <li><a href="novels.html?category=ngon-tinh" class="text-light text-decoration-none"><i class="fas fa-heart me-1"></i>Ngôn tình</a></li>
+                        <li><a href="novels.html?category=kinh-di" class="text-light text-decoration-none"><i class="fas fa-ghost me-1"></i>Kinh dị</a></li>
+                        <li><a href="novels.html?category=hai-huoc" class="text-light text-decoration-none"><i class="fas fa-laugh me-1"></i>Hài hước</a></li>
+                        <li><a href="novels.html?category=manga" class="text-light text-decoration-none"><i class="fas fa-book me-1"></i>Manga</a></li>
+                        <li><a href="novels.html?category=manhwa" class="text-light text-decoration-none"><i class="fas fa-bookmark me-1"></i>Manhwa</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-3 mb-4">
+                    <h6><i class="fas fa-link me-2"></i>Liên kết</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="#" class="text-light text-decoration-none"><i class="fas fa-info-circle me-1"></i>Giới thiệu</a></li>
+                        <li><a href="#" class="text-light text-decoration-none"><i class="fas fa-envelope me-1"></i>Liên hệ</a></li>
+                        <li><a href="#" class="text-light text-decoration-none"><i class="fas fa-file-contract me-1"></i>Điều khoản sử dụng</a></li>
+                        <li><a href="#" class="text-light text-decoration-none"><i class="fas fa-shield-alt me-1"></i>Chính sách bảo mật</a></li>
+                        <li><a href="#" class="text-light text-decoration-none"><i class="fas fa-question-circle me-1"></i>Hướng dẫn</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-3 mb-4">
+                    <h6><i class="fas fa-bell me-2"></i>Nhận thông báo</h6>
+                    <p class="small">Đăng ký để nhận thông báo truyện mới</p>
+                    <div class="input-group input-group-sm">
+                        <input type="email" class="form-control" placeholder="Email của bạn">
+                        <button class="btn btn-info" type="button">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="mt-3">
+                        <img src="assets/img/no-image.jpeg" class="img-fluid me-2" style="max-width: 120px; height: 40px; object-fit: cover;" alt="App Store">
+                        <img src="assets/img/no-image.jpeg" class="img-fluid" style="max-width: 120px; height: 40px; object-fit: cover;" alt="Play Store">
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-4">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="small mb-0">&copy; 2024 Gấu Trúc Audio. Tất cả quyền được bảo lưu.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="small mb-0">
+                        <a href="#" class="text-light text-decoration-none me-3">Điều khoản</a>
+                        <a href="#" class="text-light text-decoration-none me-3">Bảo mật</a>
+                        <a href="#" class="text-light text-decoration-none">Cookies</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+    <script>
+        // Get URL parameters
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Initialize search page
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchQuery = getUrlParameter('q') || '';
+            
+            // Set search input values
+            document.getElementById('search-input').value = searchQuery;
+            document.getElementById('main-search-input').value = searchQuery;
+            document.getElementById('search-query').textContent = `"${searchQuery}"`;
+            document.getElementById('pagination-query').textContent = searchQuery;
+            
+            // Update page title
+            if (searchQuery) {
+                document.title = `Tìm kiếm: ${searchQuery} - Gấu Trúc Audio`;
+            }
+            
+            // Simulate search results based on query
+            if (!searchQuery.trim()) {
+                showNoResults();
+            }
+        });
+
+        // Toggle between list and grid view
+        function toggleView(viewType) {
+            const listView = document.getElementById('list-view');
+            const gridView = document.getElementById('grid-view');
+            const listBtn = document.querySelector('[onclick="toggleView(\'list\')"]');
+            const gridBtn = document.querySelector('[onclick="toggleView(\'grid\')"]');
+            
+            if (viewType === 'list') {
+                listView.classList.remove('d-none');
+                gridView.classList.add('d-none');
+                listBtn.classList.add('active');
+                gridBtn.classList.remove('active');
+            } else {
+                listView.classList.add('d-none');
+                gridView.classList.remove('d-none');
+                gridBtn.classList.add('active');
+                listBtn.classList.remove('active');
+            }
+        }
+
+        // Sort results
+        function sortResults(sortBy) {
+            console.log('Sorting by:', sortBy);
+            // Here you would implement the sorting logic
+            // For demo purposes, we'll just log the value
+        }
+
+        // Apply filters
+        function applyFilters() {
+            const searchType = document.querySelector('input[name="searchType"]:checked').value;
+            const categories = [];
+            const statuses = [];
+            const types = [];
+            
+            // Get selected categories
+            document.querySelectorAll('input[id^="category-"]:checked').forEach(checkbox => {
+                categories.push(checkbox.value);
+            });
+            
+            // Get selected statuses
+            document.querySelectorAll('input[id^="status-"]:checked').forEach(checkbox => {
+                statuses.push(checkbox.value);
+            });
+            
+            // Get selected types
+            document.querySelectorAll('input[id^="type-"]:checked').forEach(checkbox => {
+                types.push(checkbox.value);
+            });
+            
+            console.log('Filters:', { searchType, categories, statuses, types });
+            // Here you would implement the filter logic and update results
+        }
+
+        // Clear all filters
+        function clearFilters() {
+            // Reset search type to "all"
+            document.getElementById('search-all').checked = true;
+            
+            // Uncheck all checkboxes
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            
+            console.log('Filters cleared');
+            // Here you would reload the search results without filters
+        }
+
+        // Show no results message
+        function showNoResults() {
+            document.getElementById('list-view').style.display = 'none';
+            document.getElementById('grid-view').style.display = 'none';
+            document.getElementById('no-results').style.display = 'block';
+            document.getElementById('result-count').textContent = '0';
+            
+            // Hide pagination
+            document.querySelector('.pagination').parentElement.style.display = 'none';
+        }
+
+        // Handle search form submission
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                const input = this.querySelector('input[name="q"]');
+                if (!input.value.trim()) {
+                    e.preventDefault();
+                    alert('Vui lòng nhập từ khóa tìm kiếm');
+                    return false;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
