@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+.main{
+    height: 100vh;
+    // display: flex;
+    justify-content: center;
+    // align-items: center;
+}
+
+.navbar-brand {
+    font-size: 1 em;
+    font-weight: bold; 
+    text-transform: uppercase;
+}
+
+.category-tag {
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    margin-right: 5px;
+    margin-bottom: 3px;
+    border-radius: 12px;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    color: #495057;
+    text-decoration: none;
+    display: inline-block;
+}
+.category-tag:hover {
+    background: #e9ecef;
+    color: #495057;
+}
+
+.keep-newlines {
+  white-space: pre-wrap; /* Quan trọng: Giữ \n và cho phép ngắt dòng */
+}
+.no-underline a {
+  text-decoration: none !important;
+//color: inherit; /* giữ màu giống chữ bình thường */
+}

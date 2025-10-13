@@ -1,0 +1,471 @@
+/* Comic & Novel Website - Custom CSS */
+/* Color Theme: Green & White */
+
+:root {
+    --primary-green: #1a7e63;
+    --dark-green: #148f5a;
+    --light-green: #52c47a;
+    --forest: #0d5d44;
+    --dark-forest: #084430;
+    --light-fo.top-item:hover {
+    background-color: rgba(26, 126, 99, 0.1);
+    border-radius: 5px;
+}
+
+/* Audio Player */
+.audio-player {
+    background: linear-gradient(135deg, var(--forest) 0%, var(--primary-green) 50%, var(--light-green) 100%);
+    color: var(--white);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+};
+    --white: #ffffff;
+    --light-gray: #f8f9fa;
+    --gray: #6c757d;
+    --accent-orange: #e67e22;
+    --success-blue: #3498db;
+    --danger-red: #e74c3c;
+}
+
+/* Navigation Styling */
+.navbar-dark {
+    background-color: var(--forest) !important;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: var(--primary-green) !important;
+}
+
+.navbar-brand:hover {
+    color: var(--light-green) !important;
+}
+
+.nav-link {
+    color: var(--white) !important;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--primary-green) !important;
+}
+
+.nav-link.active {
+    color: var(--primary-green) !important;
+}
+
+.btn-outline-light {
+    border-color: var(--primary-green);
+    color: var(--primary-green);
+}
+
+.btn-outline-light:hover {
+    background-color: var(--primary-green);
+    border-color: var(--primary-green);
+    color: var(--white);
+}
+
+/* Section Titles */
+.section-title {
+    border-left: 4px solid var(--primary-green);
+    padding-left: 15px;
+    margin-bottom: 20px;
+    color: var(--forest);
+    font-weight: 600;
+}
+
+.section-title i {
+    color: var(--primary-green) !important;
+}
+
+/* Card Styling */
+.book-cover {
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(26, 126, 99, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    height: 200px;
+}
+
+.book-cover:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(26, 126, 99, 0.4);
+}
+
+.story-card {
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 2px 8px rgba(13, 93, 68, 0.1);
+    height: 320px;
+    background: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.story-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(26, 126, 99, 0.3);
+}
+
+.story-card .card-body {
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    height: 120px;
+    background: linear-gradient(135deg, var(--white) 0%, var(--light-gray) 100%);
+}
+
+.story-card .card-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    line-height: 1.2;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-clamp: 2;
+    color: var(--forest);
+}
+
+/* Favorite Cards */
+.favorite-card {
+    height: 220px;
+    position: relative;
+    border: none;
+    background: none;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.favorite-cover {
+    height: 150px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(13, 93, 68, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.favorite-card:hover .favorite-cover {
+    transform: scale(1.03);
+}
+
+.favorite-card .card-body {
+    padding: 0.5rem;
+    height: 70px;
+    background: var(--white);
+    border-radius: 0 0 8px 8px;
+}
+
+.favorite-card .card-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0;
+    line-height: 1.1;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-clamp: 2;
+    color: var(--forest);
+}
+
+/* Badges */
+.badge-overlay {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 10;
+}
+
+.badge-full {
+    background: linear-gradient(45deg, var(--accent-orange), var(--primary-green));
+    color: var(--white);
+    border: none;
+    font-weight: 600;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.badge-primary {
+    background-color: var(--primary-green) !important;
+    color: var(--white) !important;
+}
+
+.badge-success {
+    background-color: var(--success-blue) !important;
+    color: var(--white) !important;
+}
+
+.badge-warning {
+    background-color: var(--accent-orange) !important;
+    color: var(--white) !important;
+}
+
+.badge-danger {
+    background-color: var(--danger-red) !important;
+    color: var(--white) !important;
+}
+
+.badge-info {
+    background-color: var(--light-green) !important;
+    color: var(--forest) !important;
+}
+
+.badge-secondary {
+    background-color: var(--gray) !important;
+    color: var(--white) !important;
+}
+
+.badge-dark {
+    background-color: var(--forest) !important;
+    color: var(--light-green) !important;
+}
+
+/* Sidebar */
+.sidebar-cover {
+    width: 45px;
+    height: 65px;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(44, 62, 80, 0.15);
+}
+
+.top-item {
+    border-bottom: 1px solid var(--light-gray);
+    padding: 8px 0;
+    transition: background-color 0.3s ease;
+}
+
+.top-item:last-child {
+    border-bottom: none;
+}
+
+.top-item:hover {
+    background-color: rgba(241, 196, 15, 0.1);
+    border-radius: 5px;
+}
+
+/* Audio Player */
+.audio-player {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--primary-blue) 50%, var(--light-blue) 100%);
+    color: var(--white);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Background Sections */
+.bg-light {
+    background-color: var(--light-gray) !important;
+}
+
+/* Text Colors */
+.text-muted {
+    color: var(--gray) !important;
+}
+
+/* Footer */
+footer {
+    background-color: var(--forest) !important;
+    color: var(--white);
+}
+
+footer h5 {
+    color: var(--primary-green);
+}
+
+footer a {
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: var(--primary-green);
+}
+
+/* Custom Bootstrap columns */
+@media (min-width: 992px) {
+    .col-lg-1-5 {
+        width: 12.5%;
+        flex: 0 0 12.5%;
+        max-width: 12.5%;
+    }
+    .col-lg-3 {
+        width: 25%;
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+}
+
+/* Responsive adjustments */
+
+/* Mobile - Extra Small screens (max-width: 575px) */
+@media (max-width: 575px) {
+    .story-card {
+        height: 320px;
+        margin-bottom: 1rem;
+    }
+    
+    .story-card .book-cover {
+        height: 220px;
+        aspect-ratio: 2/3;
+        object-fit: cover;
+    }
+    
+    .story-card .card-body {
+        height: 120px;
+        padding: 0.5rem;
+    }
+    
+    .story-card .card-title {
+        font-size: 0.8rem;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+    }
+    
+    .favorite-card {
+        height: 160px;
+        margin-bottom: 0.75rem;
+    }
+    
+    .favorite-cover {
+        height: 110px;
+        aspect-ratio: 2/3;
+        object-fit: cover;
+    }
+    
+    .favorite-card .card-body {
+        height: 50px;
+        padding: 0.25rem;
+    }
+    
+    .favorite-card .card-title {
+        font-size: 0.65rem;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+    }
+    
+    /* 2 columns on mobile for main stories */
+    .main-stories .col-md-6 {
+        width: 50% !important;
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+        padding: 0 0.5rem;
+    }
+    
+    /* 4 columns for favorite stories on mobile */
+    .favorite-stories .col-6 {
+        width: 25% !important;
+        flex: 0 0 25% !important;
+        max-width: 25% !important;
+        padding: 0 0.25rem;
+    }
+    
+    /* Adjust gap on mobile */
+    .main-stories.row {
+        --bs-gutter-x: 1rem;
+    }
+    
+    .favorite-stories.row {
+        --bs-gutter-x: 0.5rem;
+    }
+}
+
+/* Tablet - Small screens (576px to 767px) */
+@media (min-width: 576px) and (max-width: 767px) {
+    .story-card {
+        height: 300px;
+    }
+    
+    .story-card .book-cover {
+        height: 180px;
+        aspect-ratio: 2/3;
+        object-fit: cover;
+    }
+    
+    .story-card .card-body {
+        height: 120px;
+    }
+    
+    .favorite-card {
+        height: 200px;
+    }
+    
+    .favorite-cover {
+        height: 140px;
+        aspect-ratio: 2/3;
+        object-fit: cover;
+    }
+    
+    .favorite-card .card-body {
+        height: 60px;
+    }
+    
+    /* 2 columns on tablet for main stories */
+    .main-stories .col-md-6 {
+        width: 50% !important;
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+    }
+}
+
+/* Medium screens (768px to 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .story-card {
+        height: 320px;
+    }
+    
+    .story-card .book-cover {
+        height: 200px;
+        aspect-ratio: 2/3;
+        object-fit: cover;
+    }
+    
+    .story-card .card-body {
+        height: 120px;
+    }
+    
+    .favorite-card {
+        height: 220px;
+    }
+    
+    .favorite-cover {
+        height: 150px;
+        aspect-ratio: 2/3;
+        object-fit: cover;
+    }
+    
+    /* 3 columns on medium screens for main stories */
+    .main-stories .col-md-6 {
+        width: 33.333333% !important;
+        flex: 0 0 33.333333% !important;
+        max-width: 33.333333% !important;
+    }
+}
+
+/* Hover effects and animations */
+.card:hover {
+    cursor: pointer;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--light-gray);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-green);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--dark-green);
+}

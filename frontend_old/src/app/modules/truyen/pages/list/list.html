@@ -1,0 +1,44 @@
+<app-header></app-header>
+<div class="container-md">
+<div class="row">
+  <div class="m-2">
+    <h1> Danh sách Truyện : </h1>
+  </div>
+  <div class="col-lg-8 no-underline">
+    <div *ngFor="let novel of listsNovel" class="content-item p-2 mb-1">
+        <div class="d-flex align-items-center mb-1">
+            <span class="badge bg-success badge-status me-2">FULL</span>
+            <a href="/truyen/{{novel.Id}}" class="content-title h6 mb-0">{{novel.title}}</a>
+        </div>
+        <div class="tags">
+            <a href="#" class="category-tag">Kiếm hiệp</a>
+            <a href="#" class="category-tag">Cổ điển</a>
+            <a href="#" class="category-tag">Kim Dung</a>
+        </div>
+    </div>
+    <hr class="my-3">
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center">
+      <nav>
+        <ul class="pagination">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item active">
+            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="col-lg-4" >
+    <app-sidebar> </app-sidebar>
+  </div>
+</div>
+</div>
+<app-footer></app-footer>
